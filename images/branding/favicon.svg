@@ -1,0 +1,28 @@
+<svg
+	xmlns="http://www.w3.org/2000/svg"
+	viewBox="0 0 64 64"
+	width="64"
+	height="64"
+	role="img"
+	aria-label="Một cánh hoa anh đào"
+>
+	<defs>
+		<linearGradient id="petal" x1="0" y1="0" x2="0" y2="1">
+			<stop offset="0" stop-color="#fff4f8" />
+			<stop offset="0.55" stop-color="#ffb9ce" />
+			<stop offset="1" stop-color="#f2739b" />
+		</linearGradient>
+		<radialGradient id="glow" cx="0.5" cy="0.42" r="0.6">
+			<stop offset="0" stop-color="#ff8fb4" stop-opacity="0.35" />
+			<stop offset="1" stop-color="#ff8fb4" stop-opacity="0" />
+		</radialGradient>
+	</defs>
+
+	<rect width="64" height="64" rx="14" fill="#0b0712" />
+	<rect width="64" height="64" rx="14" fill="url(#glow)" />
+
+	<path
+		d="M32 54 C49.2 44.4 48 19.6 35.2 14 L32 19.2 L28.8 14 C16 19.6 14.8 44.4 32 54 Z"
+		fill="url(#petal)"
+	/>
+</svg>

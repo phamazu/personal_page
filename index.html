@@ -1,0 +1,242 @@
+﻿<!DOCTYPE html>
+<html lang="vi" data-lang="vi">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Phước — Tỉnh thức &amp; Chánh niệm</title>
+		<meta
+			name="description"
+			content="Một trang nhỏ để thở. Vài câu nói về tỉnh thức, chánh niệm và sự trở về với giây phút hiện tại."
+		/>
+		<meta name="author" content="Phước" />
+		<meta name="theme-color" content="#08060d" />
+		<meta name="color-scheme" content="dark" />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Phước — Tỉnh thức &amp; Chánh niệm" />
+		<meta
+			property="og:description"
+			content="Một trang nhỏ để thở. Vài câu nói về tỉnh thức, chánh niệm và sự trở về với giây phút hiện tại."
+		/>
+		<meta property="og:image" content="images/branding/avatar.png" />
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:title" content="Phước — Tỉnh thức &amp; Chánh niệm" />
+		<meta
+			name="twitter:description"
+			content="Một trang nhỏ để thở. Vài câu nói về tỉnh thức, chánh niệm và sự trở về với giây phút hiện tại."
+		/>
+
+		<link rel="icon" href="images/branding/favicon.svg" type="image/svg+xml" />
+		<link rel="apple-touch-icon" href="images/branding/avatar.png" />
+
+		<link rel="stylesheet" href="styles/base.css" />
+		<link rel="stylesheet" href="styles/pages/home.css" />
+		<link rel="stylesheet" href="styles/components/overlay.css" />
+		<noscript>
+			<link rel="stylesheet" href="styles/utilities/noscript.css" />
+		</noscript>
+	</head>
+
+	<body class="is-preload">
+		<a class="skip-link" href="#main-content" data-i18n="skipLink">Tới nội dung</a>
+
+		<canvas id="sakura" class="sakura-canvas" aria-hidden="true"></canvas>
+		<div class="veil" aria-hidden="true"></div>
+
+		<div class="page-shell">
+			<header class="controls" aria-label="Tuỳ chọn hiển thị">
+				<button
+					class="control control--lang"
+					type="button"
+					data-lang-toggle
+					aria-label="Đổi ngôn ngữ"
+					title="Đổi ngôn ngữ / Switch language"
+				>
+					<span class="control__lang control__lang--vi" aria-hidden="true">VI</span>
+					<span class="control__slash" aria-hidden="true">/</span>
+					<span class="control__lang control__lang--en" aria-hidden="true">EN</span>
+				</button>
+
+				<button
+					class="control control--effect"
+					type="button"
+					data-effect-toggle
+					aria-label="Đổi hiệu ứng cánh hoa"
+					title="Hiệu ứng: hoa / nhẹ / tĩnh"
+				>
+					<svg class="control__icon" viewBox="0 0 24 24" aria-hidden="true">
+						<path
+							d="M12 3c2.2 1.6 3.3 3.6 3.3 6 0 1.4-.4 2.6-1.1 3.6 1.1-.5 2.3-.7 3.5-.5 2.4.4 4 2 4.4 4.6-1.9 1.9-4 2.6-6.3 2.1-1.4-.3-2.5-.9-3.4-1.8.3 1.1.3 2.3-.2 3.4-.8 1.9-2.4 3-4.7 3.3-1.5-2.1-1.9-4.2-1.2-6.4.4-1.3 1.1-2.3 2-3.1-1.1 0-2.2-.3-3.2-1-1.7-1-2.6-2.7-2.7-4.9 2.3-1.2 4.5-1.3 6.6-.3 1.2.6 2.1 1.5 2.7 2.5C11 7 11.3 5.2 12 3z"
+						/>
+					</svg>
+					<span class="control__label" data-effect-label>Hoa</span>
+				</button>
+			</header>
+
+			<main class="hero" id="main-content" tabindex="-1">
+				<section class="hero__section hero__avatar-section">
+					<div class="hero__avatar-frame">
+						<img
+							class="hero__avatar"
+							src="images/branding/avatar.png"
+							alt="Chân dung Phước"
+							title="Phước"
+							width="112"
+							height="112"
+							decoding="async"
+							fetchpriority="high"
+						/>
+						<span class="hero__ring" aria-hidden="true"></span>
+					</div>
+				</section>
+
+				<section class="hero__section hero__content">
+					<div class="hero__content-inner">
+						<p class="hero__eyebrow" data-i18n="eyebrow">Người thực hành chánh niệm</p>
+						<h1 id="site-title" class="hero__title">Phước</h1>
+						<p class="hero__tagline">
+							<span class="hero__tagline-text" data-quote>Thở vào. Thở ra. Có mặt.</span>
+						</p>
+					</div>
+				</section>
+
+				<nav
+					class="hero__section hero__nav"
+					aria-label="Khám phá"
+					data-i18n-aria-label="nav.aria"
+				>
+					<ul class="nav-list">
+						<li class="nav-list__item">
+							<button class="nav-list__link" type="button" data-open="breathe">
+								<span data-i18n="nav.breathe">Thở</span>
+							</button>
+						</li>
+						<li class="nav-list__item">
+							<button class="nav-list__link" type="button" data-open="words">
+								<span data-i18n="nav.words">Câu nói</span>
+							</button>
+						</li>
+						<li class="nav-list__item">
+							<button class="nav-list__link" type="button" data-open="about">
+								<span data-i18n="nav.about">Về</span>
+							</button>
+						</li>
+					</ul>
+				</nav>
+			</main>
+
+			<footer class="site-footer">
+				<p class="site-footer__text">
+					<span aria-hidden="true">&copy;</span>
+					<span data-current-year>2026</span> Phước
+					<span class="site-footer__dot" aria-hidden="true">&middot;</span>
+					<span data-i18n="footerNote">một trang nhỏ để thở</span>
+				</p>
+				<p class="site-footer__hint" data-i18n="hint">
+					Phím &rarr; đổi câu nói &middot; Space để thở theo nhịp
+				</p>
+			</footer>
+		</div>
+
+		<div class="overlay" data-overlay hidden>
+			<div class="overlay__scrim" data-overlay-close></div>
+
+			<div
+				class="overlay__frame"
+				role="dialog"
+				aria-modal="true"
+				aria-labelledby="overlay-title"
+				tabindex="-1"
+			>
+				<button
+					class="overlay__close"
+					type="button"
+					data-overlay-close
+					data-i18n-aria-label="close"
+					aria-label="Đóng"
+				>
+					<svg viewBox="0 0 24 24" aria-hidden="true">
+						<path d="M6 6l12 12M18 6L6 18" />
+					</svg>
+				</button>
+
+				<!-- Panel: nhịp thở -->
+				<section class="panel panel--breathe" data-panel="breathe" hidden>
+					<p class="panel__kicker" data-i18n="breathe.kicker">Bốn &middot; hai &middot; sáu</p>
+					<h2 class="panel__title" id="overlay-title" data-i18n="breathe.title">Thở theo nhịp</h2>
+
+					<div class="breathe">
+						<div class="breathe__stage">
+							<div class="breathe__orb" data-breathe-orb aria-hidden="true"></div>
+							<div class="breathe__readout">
+								<span class="breathe__phase" data-breathe-phase>Hít vào</span>
+								<span class="breathe__count" data-breathe-count>4</span>
+							</div>
+						</div>
+
+						<div class="breathe__controls">
+							<button class="button" type="button" data-breathe-toggle>
+								<span data-breathe-toggle-label data-i18n="breathe.start">Bắt đầu</span>
+							</button>
+							<p class="breathe__meta">
+								<span data-i18n="breathe.breaths">Số nhịp</span>
+								<span class="breathe__meta-value" data-breathe-breaths>0</span>
+							</p>
+						</div>
+
+						<p class="breathe__note" data-i18n="breathe.note">
+							Ngồi thẳng, vai buông. Không cần làm gì khác ngoài việc theo dõi hơi thở.
+						</p>
+					</div>
+				</section>
+
+				<!-- Panel: câu nói -->
+				<section class="panel panel--words" data-panel="words" hidden>
+					<p class="panel__kicker" data-i18n="words.kicker">Ghi lại</p>
+					<h2 class="panel__title" id="overlay-title-words" data-i18n="words.title">
+						Vài câu nói
+					</h2>
+					<ul class="quote-list" data-quote-list></ul>
+					<p class="panel__footnote" data-i18n="words.footnote">
+						Những câu này không phải để thuộc lòng, chỉ để nhắc.
+					</p>
+				</section>
+
+				<!-- Panel: giới thiệu -->
+				<section class="panel panel--about" data-panel="about" hidden>
+					<p class="panel__kicker" data-i18n="about.kicker">Về trang này</p>
+					<h2 class="panel__title" id="overlay-title-about" data-i18n="about.title">
+						Một khoảng lặng
+					</h2>
+					<div class="prose">
+						<p data-i18n="about.p1">
+							Đây là một trang rất nhỏ, chỉ để mở ra, thở vài hơi rồi đóng lại. Không có
+							danh sách thành tựu, không có lời chào mời.
+						</p>
+						<p data-i18n="about.p2">
+							Tôi chọn không để lại nhiều phương thức liên hệ ở đây, vì trang này không
+							phải là nơi để liên lạc. Nếu duyên đủ, ta sẽ gặp nhau ở một chỗ khác.
+						</p>
+						<p data-i18n="about.p3">
+							Hoa anh đào nở rồi rụng. Cánh hoa rơi không vội, cũng không tiếc.
+						</p>
+					</div>
+					<p class="panel__footnote" data-i18n="about.footnote">
+						Trang được dựng bằng HTML, CSS và JavaScript thuần &mdash; không cần bước build.
+					</p>
+				</section>
+			</div>
+		</div>
+
+		<script src="scripts/app/content.js"></script>
+		<script src="scripts/effects/sakura/config.js"></script>
+		<script src="scripts/effects/sakura/math.js"></script>
+		<script src="scripts/effects/sakura/shaders.js"></script>
+		<script src="scripts/effects/sakura/gl-utils.js"></script>
+		<script src="scripts/effects/sakura/renderer.js"></script>
+		<script src="scripts/effects/sakura/canvas2d.js"></script>
+		<script src="scripts/effects/sakura/scene.js"></script>
+		<script src="scripts/app/i18n.js"></script>
+		<script src="scripts/app/home.js"></script>
+	</body>
+</html>

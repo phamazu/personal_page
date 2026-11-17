@@ -1,0 +1,34 @@
+/*
+Dự phòng khi JavaScript bị tắt: bỏ trạng thái chờ, giữ nội dung đọc được.
+*/
+
+body.is-preload .hero {
+	filter: none;
+}
+
+body.is-preload .hero__section,
+body.is-preload .site-footer {
+	opacity: 1;
+	transform: none;
+}
+
+body.is-preload .hero__content-inner {
+	max-height: none;
+	opacity: 1;
+	padding: 2.75rem 2rem 3rem;
+}
+
+body.is-preload .site-footer {
+	transform: none;
+}
+
+.controls,
+.overlay,
+.hero__nav,
+.site-footer__hint {
+	display: none;
+}
+
+.hero__tagline {
+	min-height: 0;
+}

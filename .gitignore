@@ -1,0 +1,18 @@
+# Ảnh chụp màn hình tạm thời khi kiểm tra giao diện
+.preview/
+
+# Trang kiểm tra tạm
+_verify.html
+_measure.html
+_frame.html
+_fonts.html
+_fonts.png
+
+# Phụ thuộc (dự án không cần, để đây cho chắc)
+node_modules/
+
+# Hệ điều hành / trình soạn thảo
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
