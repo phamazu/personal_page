@@ -185,14 +185,15 @@ html[data-theme="dark"] .control__icon--moon {
 
 .hero__avatar-frame {
 	border-radius: 50%;
-	height: 6.25rem;
+	height: 8.5rem;
 	position: relative;
-	width: 6.25rem;
+	width: 8.5rem;
 }
 
 .hero__avatar {
-	border: 1px solid rgba(241, 245, 242, 0.28);
+	border: 1px solid rgba(241, 245, 242, 0.32);
 	border-radius: 50%;
+	box-shadow: 0 0.75rem 2rem rgba(0, 0, 0, 0.28);
 	height: 100%;
 	object-fit: cover;
 	position: relative;
@@ -499,8 +500,8 @@ body.is-still .bamboo-canvas {
 	}
 
 	.hero__avatar-frame {
-		height: 5.25rem;
-		width: 5.25rem;
+		height: 6.75rem;
+		width: 6.75rem;
 	}
 
 	.nav-list__link {

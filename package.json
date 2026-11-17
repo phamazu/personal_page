@@ -1,17 +1,18 @@
-{
+﻿{
 	"name": "phuoc-personal-page",
 	"version": "1.0.0",
 	"private": true,
-	"description": "Trang cá nhân tối giản: hoa anh đào rơi, vài câu về tỉnh thức và chánh niệm.",
+	"description": "Trang cá nhân tối giản: lá trúc rơi, vài câu về tỉnh thức và chánh niệm.",
 	"type": "module",
 	"scripts": {
 		"start": "node scripts/serve.mjs",
 		"preview": "node scripts/serve.mjs 4173",
-		"assets": "python scripts/assets/make-avatar.py"
+		"avatar": "python scripts/assets/make-photo-avatar.py",
+		"avatar:monogram": "python scripts/assets/make-avatar.py"
 	},
 	"engines": {
 		"node": ">=18"
 	},
-	"keywords": ["personal-page", "sakura", "webgl", "mindfulness", "static-site"],
+	"keywords": ["personal-page", "bamboo", "webgl", "mindfulness", "static-site"],
 	"license": "MIT"
 }

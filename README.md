@@ -72,7 +72,8 @@ tương đối và favicon hoạt động đúng.
 │   │   ├── renderer.js           # renderer WebGL
 │   │   ├── canvas2d.js           # bản dự phòng Canvas 2D
 │   │   └── scene.js              # chọn chế độ, vòng lặp, resize
-│   ├── assets/make-avatar.py     # sinh ảnh đại diện + favicon
+│   ├── assets/make-photo-avatar.py   # cắt ảnh thật thành ảnh đại diện
+│   ├── assets/make-avatar.py         # (dự phòng) sinh ảnh chữ lồng + favicon
 │   └── serve.mjs                 # máy chủ tĩnh để xem thử
 └── images/
     ├── branding/                 # avatar, favicon
@@ -94,17 +95,29 @@ giới thiệu chỉ cần sửa file này.
 
 ### 2. Ảnh đại diện
 
-Thay `images/branding/avatar.png` bằng ảnh của bạn (nên là ảnh vuông, từ 512 px trở lên).
-Muốn dùng lại ảnh sinh sẵn:
+Ảnh gốc để ở `images/branding/avatar-source.jpg`. Script cắt một khung vuông quanh mặt rồi xuất
+`avatar.png` 512×512:
 
 ```bash
-python scripts/assets/make-avatar.py    # cần Pillow
+python scripts/assets/make-photo-avatar.py    # cần Pillow
 ```
 
-Script vẽ chữ lồng "P" trên nền xanh tối, vài lá trúc ở rìa; sửa `TOP`, `BOTTOM`, `LEAF` hoặc
-chữ trong `build_avatar()` nếu muốn khác.
+Khung cắt khai báo bằng pixel trên ảnh gốc: `CROP = (trái, trên, cạnh)`. Đổi một dòng là cắt lại,
+không cần mở phần mềm chỉnh ảnh.
 
-> Tên file favicon là `images/branding/favicon.svg`, `favicon.png` được sinh kèm để dự phòng.
+Muốn quay lại ảnh chữ lồng thay vì ảnh thật:
+
+```bash
+python scripts/assets/make-avatar.py
+```
+
+Script này vẽ chữ "P" trên nền xanh tối, vài lá trúc ở rìa; sửa `TOP`, `BOTTOM`, `LEAF` hoặc chữ
+trong `build_avatar()` nếu muốn khác.
+
+Cách nhanh nhất vẫn là ghi đè thẳng `images/branding/avatar.png` bằng một ảnh vuông từ 512 px
+trở lên — trang dùng `object-fit: cover` nên ảnh không vuông cũng không bị méo.
+
+> Favicon là `images/branding/favicon.svg` (một lá trúc); `favicon.png` chỉ là bản dự phòng.
 
 ### 3. Màu sắc và chữ
 
