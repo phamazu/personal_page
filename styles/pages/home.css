@@ -1,9 +1,9 @@
-/*
+﻿/*
 Bố cục trang chủ.
 Chỉ chịu trách nhiệm: khung hình, nhịp khoảng cách, responsive và hiệu ứng mở trang.
 */
 
-.sakura-canvas {
+.bamboo-canvas {
 	display: block;
 	height: 100vh;
 	height: 100dvh;
@@ -16,12 +16,12 @@ Chỉ chịu trách nhiệm: khung hình, nhịp khoảng cách, responsive và 
 	z-index: 2;
 }
 
-body.is-scene-ready .sakura-canvas {
+body.is-scene-ready .bamboo-canvas {
 	opacity: 1;
 }
 
 /* Mở bảng thì lùi cảnh hoa lại để nội dung là tâm điểm. */
-body.is-overlay-open .sakura-canvas {
+body.is-overlay-open .bamboo-canvas {
 	opacity: 0.32;
 }
 
@@ -40,16 +40,16 @@ body.is-overlay-open .sakura-canvas {
 }
 
 /*
-Vệt tối phía sau nội dung: giữ chữ đọc được dù cánh hoa rơi phía sau.
+Vệt tối phía sau nội dung: giữ chữ đọc được dù lá rơi phía sau.
 Đặt z-index âm để nằm trong ngữ cảnh xếp lớp của .page-shell (z-index: 3)
 nhưng vẫn nổi lên trên canvas (z-index: 2).
 */
 .page-shell::before {
 	background: radial-gradient(
 		42rem 30rem at 50% 44%,
-		rgba(7, 4, 12, 0.86) 0%,
-		rgba(7, 4, 12, 0.58) 44%,
-		rgba(7, 4, 12, 0) 74%
+		rgba(4, 12, 8, 0.86) 0%,
+		rgba(4, 12, 8, 0.58) 44%,
+		rgba(4, 12, 8, 0) 74%
 	);
 	content: "";
 	inset: 0;
@@ -73,7 +73,7 @@ nhưng vẫn nổi lên trên canvas (z-index: 2).
 	align-items: center;
 	backdrop-filter: blur(6px);
 	-webkit-backdrop-filter: blur(6px);
-	background-color: rgba(243, 237, 244, 0.04);
+	background-color: rgba(241, 245, 242, 0.04);
 	border: 1px solid var(--color-border);
 	border-radius: var(--radius-pill);
 	color: var(--color-fg-muted);
@@ -94,7 +94,7 @@ nhưng vẫn nổi lên trên canvas (z-index: 2).
 
 .control:hover {
 	background-color: var(--color-border-hover);
-	border-color: rgba(243, 237, 244, 0.28);
+	border-color: rgba(241, 245, 242, 0.28);
 	color: var(--color-fg);
 }
 
@@ -178,7 +178,7 @@ html[data-lang="en"] .control__lang--vi {
 }
 
 .hero__avatar {
-	border: 1px solid rgba(243, 237, 244, 0.28);
+	border: 1px solid rgba(241, 245, 242, 0.28);
 	border-radius: 50%;
 	height: 100%;
 	object-fit: cover;
@@ -189,7 +189,7 @@ html[data-lang="en"] .control__lang--vi {
 }
 
 .hero__avatar-frame:hover .hero__avatar {
-	border-color: rgba(255, 214, 226, 0.6);
+	border-color: rgba(213, 246, 224, 0.6);
 	transform: scale(1.03);
 }
 
@@ -201,7 +201,7 @@ html[data-lang="en"] .control__lang--vi {
 		transparent,
 		var(--color-accent-glow),
 		transparent 44%,
-		rgba(255, 214, 226, 0.22) 62%,
+		rgba(213, 246, 224, 0.22) 62%,
 		transparent
 	);
 	border-radius: 50%;
@@ -267,7 +267,7 @@ html[data-lang="en"] .control__lang--vi {
 	font-size: var(--font-size-tiny);
 	letter-spacing: var(--font-letter-spacing);
 	margin-bottom: 1.15rem;
-	text-shadow: 0 0 1.2rem rgba(5, 3, 9, 0.9);
+	text-shadow: 0 0 1.2rem rgba(3, 9, 6, 0.9);
 	text-transform: uppercase;
 }
 
@@ -277,11 +277,11 @@ html[data-lang="en"] .control__lang--vi {
 	letter-spacing: 0.03em;
 	line-height: 1;
 	margin-bottom: 1.35rem;
-	text-shadow: 0 0 3.5rem rgba(255, 157, 187, 0.25);
+	text-shadow: 0 0 3.5rem rgba(134, 217, 164, 0.22);
 }
 
 .hero__tagline {
-	color: rgba(243, 237, 244, 0.74);
+	color: rgba(241, 245, 242, 0.74);
 	font-family: var(--font-display);
 	font-size: clamp(1rem, 2.4vw, 1.15rem);
 	font-style: italic;
@@ -290,7 +290,7 @@ html[data-lang="en"] .control__lang--vi {
 	margin: 0 auto;
 	max-width: 34rem;
 	min-height: 3.5em;
-	text-shadow: 0 0 1.4rem rgba(5, 3, 9, 0.92), 0 0 0.4rem rgba(5, 3, 9, 0.7);
+	text-shadow: 0 0 1.4rem rgba(3, 9, 6, 0.92), 0 0 0.4rem rgba(3, 9, 6, 0.7);
 	text-wrap: pretty;
 }
 
@@ -307,7 +307,7 @@ html[data-lang="en"] .control__lang--vi {
 .nav-list {
 	backdrop-filter: blur(6px);
 	-webkit-backdrop-filter: blur(6px);
-	background-color: rgba(243, 237, 244, 0.03);
+	background-color: rgba(241, 245, 242, 0.03);
 	border: 1px solid var(--color-border);
 	border-radius: var(--radius-base);
 	display: flex;
@@ -329,7 +329,7 @@ html[data-lang="en"] .control__lang--vi {
 	min-width: 7.5rem;
 	padding: 0 1.15rem;
 	position: relative;
-	text-shadow: 0 0 1.2rem rgba(5, 3, 9, 0.95);
+	text-shadow: 0 0 1.2rem rgba(3, 9, 6, 0.95);
 	text-transform: uppercase;
 	transition: background-color 0.25s var(--ease-soft), color 0.25s var(--ease-soft);
 }
@@ -374,8 +374,8 @@ html[data-lang="en"] .control__lang--vi {
 .site-footer::before {
 	background: radial-gradient(
 		26rem 7rem at 50% 50%,
-		rgba(6, 3, 10, 0.72),
-		rgba(6, 3, 10, 0) 72%
+		rgba(4, 10, 7, 0.72),
+		rgba(4, 10, 7, 0) 72%
 	);
 	content: "";
 	inset: -1.25rem -3rem;
@@ -388,7 +388,7 @@ html[data-lang="en"] .control__lang--vi {
 	color: var(--color-fg-faint);
 	font-size: var(--font-size-tiny);
 	letter-spacing: 0.22em;
-	text-shadow: 0 0 1.1rem rgba(5, 3, 9, 0.95), 0 0 0.35rem rgba(5, 3, 9, 0.8);
+	text-shadow: 0 0 1.1rem rgba(3, 9, 6, 0.95), 0 0 0.35rem rgba(3, 9, 6, 0.8);
 	text-transform: uppercase;
 }
 
@@ -398,11 +398,11 @@ html[data-lang="en"] .control__lang--vi {
 }
 
 .site-footer__hint {
-	color: rgba(243, 237, 244, 0.4);
+	color: rgba(241, 245, 242, 0.4);
 	font-size: 0.6rem;
 	letter-spacing: 0.2em;
 	margin-top: 0.85rem;
-	text-shadow: 0 0 1rem rgba(5, 3, 9, 0.95);
+	text-shadow: 0 0 1rem rgba(3, 9, 6, 0.95);
 	text-transform: uppercase;
 }
 
@@ -447,7 +447,7 @@ body:not(.is-preload) .site-footer {
 }
 
 /* Chế độ "tĩnh": tắt hoa, nền đứng yên. */
-body.is-still .sakura-canvas {
+body.is-still .bamboo-canvas {
 	opacity: 0;
 }
 

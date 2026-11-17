@@ -1,23 +1,23 @@
-/*
+﻿/*
 Nền tảng: biến thiết kế, reset, typography và các lớp tiện ích dùng chung.
 Mọi trang con đều kế thừa file này, không khai báo lại token ở nơi khác.
 */
 
 :root {
 	/* Màu */
-	--color-bg: #08060d;
-	--color-bg-soft: #120d1a;
-	--color-fg: #f3edf4;
-	--color-fg-muted: rgba(243, 237, 244, 0.62);
-	--color-fg-faint: rgba(243, 237, 244, 0.38);
-	--color-border: rgba(243, 237, 244, 0.16);
-	--color-border-hover: rgba(243, 237, 244, 0.08);
-	--color-border-active: rgba(243, 237, 244, 0.14);
+	--color-bg: #070b0a;
+	--color-bg-soft: #0d1512;
+	--color-fg: #f1f5f2;
+	--color-fg-muted: rgba(241, 245, 242, 0.62);
+	--color-fg-faint: rgba(241, 245, 242, 0.38);
+	--color-border: rgba(241, 245, 242, 0.16);
+	--color-border-hover: rgba(241, 245, 242, 0.08);
+	--color-border-active: rgba(241, 245, 242, 0.14);
 
 	/* Nhấn sắc anh đào */
-	--color-accent: #ff9dbb;
-	--color-accent-soft: #ffd6e2;
-	--color-accent-glow: rgba(255, 118, 160, 0.32);
+	--color-accent: #86d9a4;
+	--color-accent-soft: #d5f6e0;
+	--color-accent-glow: rgba(110, 220, 160, 0.3);
 
 	/* Khoảng cách & nhịp điệu */
 	--space-section: 3.25rem;
@@ -68,12 +68,12 @@ body::before {
 	background:
 		radial-gradient(
 			58rem 34rem at 50% -6%,
-			rgba(255, 148, 180, 0.22),
-			rgba(255, 148, 180, 0) 68%
+			rgba(96, 196, 138, 0.18),
+			rgba(96, 196, 138, 0) 68%
 		),
-		radial-gradient(44rem 30rem at 84% 102%, rgba(126, 108, 255, 0.18), transparent 70%),
-		radial-gradient(40rem 26rem at 6% 88%, rgba(255, 196, 160, 0.08), transparent 72%),
-		linear-gradient(180deg, #0b0712 0%, #08060d 52%, #060409 100%);
+		radial-gradient(44rem 30rem at 84% 102%, rgba(72, 150, 168, 0.16), transparent 70%),
+		radial-gradient(40rem 26rem at 6% 88%, rgba(176, 205, 128, 0.07), transparent 72%),
+		linear-gradient(180deg, #080d0b 0%, #06090a 52%, #04070a 100%);
 	content: "";
 	inset: 0;
 	pointer-events: none;
@@ -97,7 +97,7 @@ body::before {
 }
 
 .veil::after {
-	background: radial-gradient(circle at 50% 46%, transparent 38%, rgba(4, 2, 8, 0.72) 100%);
+	background: radial-gradient(circle at 50% 46%, transparent 38%, rgba(3, 8, 6, 0.72) 100%);
 	content: "";
 	inset: 0;
 	position: absolute;
@@ -155,7 +155,7 @@ button {
 }
 
 ::selection {
-	background-color: rgba(255, 157, 187, 0.28);
+	background-color: rgba(134, 217, 164, 0.26);
 	color: #fff;
 }
 

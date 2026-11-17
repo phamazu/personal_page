@@ -1,4 +1,4 @@
-/*
+﻿/*
 Toán học tối thiểu cho renderer: ma trận 4x4 và vài hàm tiện ích.
 Cố ý giữ phẳng (Float32Array) để chuyển thẳng vào WebGL, không phụ thuộc thư viện ngoài.
 */
@@ -150,7 +150,7 @@ Cố ý giữ phẳng (Float32Array) để chuyển thẳng vào WebGL, không p
 		},
 	};
 
-	window.SakuraMath = {
+	window.BambooMath = {
 		mat4: mat4,
 
 		clamp: function (value, min, max) {

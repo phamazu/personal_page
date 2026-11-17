@@ -1,16 +1,16 @@
-/*
-Renderer WebGL: một lượt vẽ duy nhất cho toàn bộ cánh hoa.
+﻿/*
+Renderer WebGL: một lượt vẽ duy nhất cho toàn bộ lá trúc.
 - Dữ liệu tĩnh (seed) nạp một lần; mỗi khung hình chỉ cập nhật uTime.
-- Sắp xếp cánh hoa theo trục z trước khi nạp để lớp xa luôn vẽ trước lớp gần.
+- Sắp xếp lá theo trục z trước khi nạp để lớp xa luôn vẽ trước lớp gần.
 - Toàn bộ phép tính chuyển động nằm trong vertex shader nên CPU gần như rảnh.
 */
 (function (window) {
 	"use strict";
 
-	var config = window.SakuraConfig;
-	var math = window.SakuraMath;
-	var shaders = window.SakuraShaders;
-	var utils = window.SakuraGlUtils;
+	var config = window.BambooConfig;
+	var math = window.BambooMath;
+	var shaders = window.BambooShaders;
+	var utils = window.BambooGlUtils;
 
 	var UNIFORM_NAMES = [
 		"uViewProjection",
@@ -25,6 +25,7 @@ Renderer WebGL: một lượt vẽ duy nhất cho toàn bộ cánh hoa.
 		"uSwayFrequency",
 		"uSpinRange",
 		"uSizeRange",
+		"uLeafAspect",
 		"uFocus",
 		"uDofRange",
 		"uSoftNear",
@@ -32,13 +33,14 @@ Renderer WebGL: một lượt vẽ duy nhất cho toàn bộ cánh hoa.
 		"uAlphaNear",
 		"uAlphaFar",
 		"uScaleFar",
-		"uColorLight",
-		"uColorPink",
-		"uColorDeep",
+		"uPixelHeight",
+		"uColorPale",
+		"uColorLeaf",
+		"uColorShade",
 	];
 
 	var FLOATS_PER_VERTEX = 10;
-	var FLOATS_PER_PETAL = 6 * FLOATS_PER_VERTEX;
+	var FLOATS_PER_LEAF = 6 * FLOATS_PER_VERTEX;
 
 	var CORNERS = [
 		[-1, -1],
@@ -50,11 +52,11 @@ Renderer WebGL: một lượt vẽ duy nhất cho toàn bộ cánh hoa.
 	];
 
 	function buildGeometry(count) {
-		var petals = [];
+		var leaves = [];
 		var index;
 
 		for (index = 0; index < count; index += 1) {
-			petals.push({
+			leaves.push({
 				seedX: Math.random() * 2 - 1,
 				seedY: Math.random() * 2 - 1,
 				seedZ: Math.random(),
@@ -67,29 +69,29 @@ Renderer WebGL: một lượt vẽ duy nhất cho toàn bộ cánh hoa.
 		}
 
 		/* z nhỏ = xa camera ⇒ vẽ trước. */
-		petals.sort(function (a, b) {
+		leaves.sort(function (a, b) {
 			return a.seedZ - b.seedZ;
 		});
 
-		var data = new Float32Array(petals.length * FLOATS_PER_PETAL);
+		var data = new Float32Array(leaves.length * FLOATS_PER_LEAF);
 		var offset = 0;
 
-		for (index = 0; index < petals.length; index += 1) {
-			var petal = petals[index];
+		for (index = 0; index < leaves.length; index += 1) {
+			var leaf = leaves[index];
 
 			for (var cornerIndex = 0; cornerIndex < CORNERS.length; cornerIndex += 1) {
 				var corner = CORNERS[cornerIndex];
 
 				data[offset] = corner[0];
 				data[offset + 1] = corner[1];
-				data[offset + 2] = petal.seedX;
-				data[offset + 3] = petal.seedY;
-				data[offset + 4] = petal.seedZ;
-				data[offset + 5] = petal.seedW;
-				data[offset + 6] = petal.randX;
-				data[offset + 7] = petal.randY;
-				data[offset + 8] = petal.randZ;
-				data[offset + 9] = petal.randW;
+				data[offset + 2] = leaf.seedX;
+				data[offset + 3] = leaf.seedY;
+				data[offset + 4] = leaf.seedZ;
+				data[offset + 5] = leaf.seedW;
+				data[offset + 6] = leaf.randX;
+				data[offset + 7] = leaf.randY;
+				data[offset + 8] = leaf.randZ;
+				data[offset + 9] = leaf.randW;
 
 				offset += FLOATS_PER_VERTEX;
 			}
@@ -115,7 +117,7 @@ Renderer WebGL: một lượt vẽ duy nhất cho toàn bộ cánh hoa.
 			return null;
 		}
 
-		var count = settings.count || 900;
+		var count = settings.count || config.leaves.count.webgl.desktop;
 		var geometry = buildGeometry(count);
 		var buffer = gl.createBuffer();
 
@@ -173,7 +175,8 @@ Renderer WebGL: một lượt vẽ duy nhất cho toàn bộ cánh hoa.
 			gl.uniform1f(uniforms.uSwayAmplitude, config.motion.swayAmplitude);
 			gl.uniform1f(uniforms.uSwayFrequency, config.motion.swayFrequency);
 			gl.uniform2f(uniforms.uSpinRange, config.motion.spin[0], config.motion.spin[1]);
-			gl.uniform2f(uniforms.uSizeRange, config.petals.size[0], config.petals.size[1]);
+			gl.uniform2f(uniforms.uSizeRange, config.leaves.size[0], config.leaves.size[1]);
+			gl.uniform1f(uniforms.uLeafAspect, config.leaves.aspect);
 			gl.uniform1f(uniforms.uFocus, config.depthOfField.focus);
 			gl.uniform1f(uniforms.uDofRange, config.depthOfField.range);
 			gl.uniform1f(uniforms.uSoftNear, config.depthOfField.softnessNear);
@@ -181,9 +184,9 @@ Renderer WebGL: một lượt vẽ duy nhất cho toàn bộ cánh hoa.
 			gl.uniform1f(uniforms.uAlphaNear, config.depthOfField.alphaNear);
 			gl.uniform1f(uniforms.uAlphaFar, config.depthOfField.alphaFar);
 			gl.uniform1f(uniforms.uScaleFar, config.depthOfField.scaleFar);
-			gl.uniform3fv(uniforms.uColorLight, config.color.light);
-			gl.uniform3fv(uniforms.uColorPink, config.color.pink);
-			gl.uniform3fv(uniforms.uColorDeep, config.color.deep);
+			gl.uniform3fv(uniforms.uColorPale, config.color.pale);
+			gl.uniform3fv(uniforms.uColorLeaf, config.color.leaf);
+			gl.uniform3fv(uniforms.uColorShade, config.color.shade);
 		}
 
 		function bindAttributes() {
@@ -220,6 +223,7 @@ Renderer WebGL: một lượt vẽ duy nhất cho toàn bộ cánh hoa.
 
 			gl.uniform1f(uniforms.uTime, time);
 			gl.uniform1f(uniforms.uAspect, state.aspect);
+			gl.uniform1f(uniforms.uPixelHeight, canvas.height);
 
 			gl.drawArrays(gl.TRIANGLES, 0, count * 6);
 		}
@@ -250,7 +254,7 @@ Renderer WebGL: một lượt vẽ duy nhất cho toàn bộ cánh hoa.
 		};
 	}
 
-	window.SakuraRenderer = {
+	window.BambooRenderer = {
 		create: create,
 	};
 })(window);

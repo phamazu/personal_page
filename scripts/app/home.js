@@ -9,7 +9,7 @@ Khởi động trang chủ:
 	"use strict";
 
 	var i18n = window.AppI18n;
-	var scene = window.SakuraScene;
+	var scene = window.BambooScene;
 	var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 	var QUOTE_INTERVAL = 7000;

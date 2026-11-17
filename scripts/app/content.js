@@ -1,4 +1,4 @@
-/*
+﻿/*
 Toàn bộ nội dung hiển thị của trang.
 Muốn đổi tên, câu nói hay lời giới thiệu: chỉ cần sửa file này.
 Khoá có dấu chấm (vd. "nav.breathe") được gắn trực tiếp vào thuộc tính data-i18n.
@@ -36,8 +36,8 @@ Khoá có dấu chấm (vd. "nav.breathe") được gắn trực tiếp vào thu
 				hint: "Phím → đổi câu nói · Space để thở theo nhịp",
 				close: "Đóng",
 
-				"controls.effect": "Đổi hiệu ứng cánh hoa",
-				"effect.auto": "Hoa",
+				"controls.effect": "Đổi hiệu ứng lá trúc",
+				"effect.auto": "Lá",
 				"effect.light": "Nhẹ",
 				"effect.off": "Tĩnh",
 
@@ -64,7 +64,7 @@ Khoá có dấu chấm (vd. "nav.breathe") được gắn trực tiếp vào thu
 				"about.p2":
 					"Tôi chọn không để lại nhiều phương thức liên hệ ở đây, vì trang này không phải là nơi để liên lạc. Nếu duyên đủ, ta sẽ gặp nhau ở một chỗ khác.",
 				"about.p3":
-					"Hoa anh đào nở rồi rụng. Cánh hoa rơi không vội, cũng không tiếc.",
+					"Trúc rỗng ruột mà đứng vững. Lá rụng về gốc, không vội, cũng không tiếc.",
 				"about.footnote":
 					"Trang được dựng bằng HTML, CSS và JavaScript thuần — không cần bước build.",
 			},
@@ -80,8 +80,8 @@ Khoá có dấu chấm (vd. "nav.breathe") được gắn trực tiếp vào thu
 				hint: "→ for the next thought · Space to follow your breath",
 				close: "Close",
 
-				"controls.effect": "Change the petal effect",
-				"effect.auto": "Bloom",
+				"controls.effect": "Change the leaf effect",
+				"effect.auto": "Leaves",
 				"effect.light": "Light",
 				"effect.off": "Still",
 
@@ -108,7 +108,7 @@ Khoá có dấu chấm (vd. "nav.breathe") được gắn trực tiếp vào thu
 				"about.p2":
 					"I have chosen to leave few ways of reaching me here, because this page is not a place for contact. If the conditions are right, we will meet somewhere else.",
 				"about.p3":
-					"Cherry blossoms open, then fall. The petal falls without hurry, and without regret.",
+					"Bamboo stands because it is hollow. Its leaves fall to the root — without hurry, without regret.",
 				"about.footnote":
 					"Built with plain HTML, CSS and JavaScript — no build step required.",
 			},
@@ -121,7 +121,7 @@ Khoá có dấu chấm (vd. "nav.breathe") được gắn trực tiếp vào thu
 				"Tỉnh thức không phải là đi đâu xa — mà là trở về với hơi thở này.",
 				"Tâm như mặt hồ: lặng thì thấy đáy, động thì chỉ thấy sóng.",
 				"Không phải chuyện gì cũng cần phản ứng. Có những lúc chỉ cần quan sát.",
-				"Cánh hoa rơi không vội, cũng không tiếc.",
+				"Lá trúc rơi không vội, cũng không tiếc.",
 				"Hạnh phúc không ở cuối đường, nó ở từng bước chân.",
 				"Buông không phải là mất — mà là nhẹ.",
 			],
@@ -130,7 +130,7 @@ Khoá có dấu chấm (vd. "nav.breathe") được gắn trực tiếp vào thu
 				"Awakening is not a journey elsewhere — it is a return to this breath.",
 				"The mind is a lake: still, it shows the depths; stirred, it shows only waves.",
 				"Not everything needs a reaction. Sometimes simply watching is enough.",
-				"The petal falls without hurry, and without regret.",
+				"The bamboo leaf falls without hurry, and without regret.",
 				"Happiness is not at the end of the road; it is in each step.",
 				"Letting go is not losing — it is becoming light.",
 			],

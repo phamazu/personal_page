@@ -1,15 +1,15 @@
-﻿/*
+/*
 Bộ điều phối cảnh nền.
 - Chọn WebGL khi máy hỗ trợ, tự lùi về Canvas 2D nếu không.
-- Ba chế độ: "auto" (hoa đầy đủ), "light" (nhẹ), "off" (tĩnh).
+- Ba chế độ: "auto" (lá đầy đủ), "light" (nhẹ), "off" (tĩnh).
 - Nhớ lựa chọn, tạm dừng khi tab bị ẩn, tôn trọng prefers-reduced-motion.
 */
 (function (window, document) {
 	"use strict";
 
-	var config = window.SakuraConfig;
+	var config = window.BambooConfig;
 	var MODES = ["auto", "light", "off"];
-	var STORAGE_KEY = "phuoc.sakura";
+	var STORAGE_KEY = "phuoc.effect";
 
 	var state = {
 		canvas: null,
@@ -76,7 +76,7 @@ Bộ điều phối cảnh nền.
 
 	function rendererCount(kind) {
 		var mobile = isMobile();
-		var table = config.petals.count[kind] || config.petals.count.webgl;
+		var table = config.leaves.count[kind] || config.leaves.count.webgl;
 		return mobile ? table.mobile : table.desktop;
 	}
 
@@ -156,7 +156,7 @@ Bộ điều phối cảnh nền.
 		var renderer = null;
 
 		if (mode === "auto") {
-			renderer = window.SakuraRenderer.create(canvas, {
+			renderer = window.BambooRenderer.create(canvas, {
 				count: rendererCount("webgl"),
 				onLost: function () {
 					/* Mất ngữ cảnh WebGL: chuyển sang bản nhẹ để trang không trắng nền. */
@@ -166,7 +166,7 @@ Bộ điều phối cảnh nền.
 		}
 
 		if (!renderer) {
-			renderer = window.SakuraCanvas2D.create(canvas, {
+			renderer = window.BambooCanvas2D.create(canvas, {
 				count: isMobile()
 					? config.canvas2d.count.mobile
 					: config.canvas2d.count.desktop,
@@ -295,7 +295,7 @@ Bộ điều phối cảnh nền.
 		};
 	}
 
-	window.SakuraScene = {
+	window.BambooScene = {
 		init: init,
 		on: on,
 		modes: MODES.slice(),

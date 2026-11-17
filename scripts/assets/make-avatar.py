@@ -1,6 +1,6 @@
-"""Sinh ảnh đại diện và favicon cho trang.
+﻿"""Sinh ảnh đại diện và favicon cho trang (chủ đề lá trúc).
 
-Ảnh đại diện: nền tối chuyển sắc, vài cánh hoa ở rìa, chữ lồng "P" serif
+Ảnh đại diện: nền tối chuyển sắc, vài lá trúc ở rìa, chữ lồng "P" serif
 tô gradient trắng-hồng, một vòng tròn mảnh.
 
 Chạy: python scripts/assets/make-avatar.py
@@ -26,10 +26,10 @@ FONT_CANDIDATES = [
     r"C:\Windows\Fonts\times.ttf",
 ]
 
-PINK = (255, 157, 187)
-GLOW = (255, 122, 165)
-TOP = (40, 27, 50)
-BOTTOM = (11, 8, 17)
+LEAF = (124, 208, 148)
+GLOW = (86, 196, 132)
+TOP = (26, 44, 34)
+BOTTOM = (7, 13, 11)
 
 
 def mix(a, b, t):
@@ -66,13 +66,12 @@ def bezier(p0, p1, p2, p3, steps):
     return points
 
 
-def petal_points(cx, cy, r, angle):
-    """Cùng dáng cánh hoa với bản Canvas 2D: vẽ bằng hai nhánh bezier, có khía đầu."""
-    # Toạ độ đơn vị: cuống ở (0, 1), khía ở (0, -0.74), hai vai ở (±0.16, -1).
+def leaf_points(cx, cy, r, angle):
+    """Dáng lá trúc: nhọn hai đầu, rộng nhất khoảng một phần ba trên.
+    Toạ độ đơn vị: cuống ở (0, 1), đầu lá ở (0, -1)."""
     outline = [(0.0, 1.0)]
-    outline += bezier((0.0, 1.0), (0.86, 0.52), (0.80, -0.72), (0.16, -1.0), 26)
-    outline += [(0.0, -0.74)]
-    outline += bezier((-0.16, -1.0), (-0.80, -0.72), (-0.86, 0.52), (0.0, 1.0), 26)
+    outline += bezier((0.0, 1.0), (0.50, 0.55), (0.58, -0.45), (0.0, -1.0), 30)
+    outline += bezier((0.0, -1.0), (-0.58, -0.45), (-0.50, 0.55), (0.0, 1.0), 30)
 
     ca, sa = math.cos(angle), math.sin(angle)
     return [
@@ -97,7 +96,7 @@ def add_petals(image, seed=11):
 
     for fx, fy, fr, angle, alpha in spots:
         draw.polygon(
-            petal_points(S * fx, S * fy, S * fr, angle), fill=(255, 205, 224, alpha)
+            leaf_points(S * fx, S * fy, S * fr, angle), fill=(186, 236, 198, alpha)
         )
 
     layer = layer.filter(ImageFilter.GaussianBlur(S * 0.003))
@@ -136,11 +135,11 @@ def build_avatar():
     image = add_petals(image)
 
     font = load_font(int(S * 0.50))
-    glyph, mask = gradient_glyph("P", font, (255, 249, 252), (255, 168, 196))
+    glyph, mask = gradient_glyph("P", font, (242, 255, 244), (140, 220, 166))
 
     # Quầng sáng sau chữ.
     halo = Image.new("RGBA", (S, S), (0, 0, 0, 0))
-    halo.paste(Image.new("RGBA", (S, S), (255, 190, 214, 155)), (0, 0), mask)
+    halo.paste(Image.new("RGBA", (S, S), (168, 232, 184, 150)), (0, 0), mask)
     halo = halo.filter(ImageFilter.GaussianBlur(S * 0.045))
     image = Image.alpha_composite(image, halo)
     image = Image.alpha_composite(image, glyph)
@@ -150,7 +149,7 @@ def build_avatar():
         ring = Image.new("RGBA", (S, S), (0, 0, 0, 0))
         ImageDraw.Draw(ring).ellipse(
             [S * inset, S * inset, S * (1 - inset), S * (1 - inset)],
-            outline=(255, 214, 226, alpha),
+            outline=(206, 244, 218, alpha),
             width=max(1, int(S * width)),
         )
         image = Image.alpha_composite(image, ring)

@@ -1,4 +1,4 @@
-/*
+﻿/*
 Tiện ích WebGL: tạo ngữ cảnh, biên dịch shader, tạo chương trình.
 Mọi lỗi biên dịch đều được ghi ra console kèm số dòng để dễ sửa shader.
 */
@@ -30,7 +30,7 @@ Mọi lỗi biên dịch đều được ghi ra console kèm số dòng để d�
 		if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
 			var kind = type === gl.VERTEX_SHADER ? "vertex" : "fragment";
 			var log = gl.getShaderInfoLog(shader);
-			window.console.error("[sakura] Không biên dịch được shader " + kind + ":\n" + log);
+			window.console.error("[bamboo] Không biên dịch được shader " + kind + ":\n" + log);
 			gl.deleteShader(shader);
 			return null;
 		}
@@ -55,7 +55,7 @@ Mọi lỗi biên dịch đều được ghi ra console kèm số dòng để d�
 		gl.deleteShader(fragmentShader);
 
 		if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-			window.console.error("[sakura] Không link được chương trình:", gl.getProgramInfoLog(program));
+			window.console.error("[bamboo] Không link được chương trình:", gl.getProgramInfoLog(program));
 			gl.deleteProgram(program);
 			return null;
 		}
@@ -70,7 +70,7 @@ Mọi lỗi biên dịch đều được ghi ra console kèm số dòng để d�
 		}, {});
 	}
 
-	window.SakuraGlUtils = {
+	window.BambooGlUtils = {
 		createContext: createContext,
 		createProgram: createProgram,
 		getUniforms: getUniforms,
