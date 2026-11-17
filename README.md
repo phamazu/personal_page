@@ -96,7 +96,7 @@ giới thiệu chỉ cần sửa file này.
 ### 2. Ảnh đại diện
 
 Ảnh gốc để ở `images/branding/avatar-source.jpg`. Script cắt một khung vuông quanh mặt rồi xuất
-`avatar.png` 512×512:
+`avatar.jpg` 480×480:
 
 ```bash
 python scripts/assets/make-photo-avatar.py    # cần Pillow
@@ -114,10 +114,10 @@ python scripts/assets/make-avatar.py
 Script này vẽ chữ "P" trên nền xanh tối, vài lá trúc ở rìa; sửa `TOP`, `BOTTOM`, `LEAF` hoặc chữ
 trong `build_avatar()` nếu muốn khác.
 
-Cách nhanh nhất vẫn là ghi đè thẳng `images/branding/avatar.png` bằng một ảnh vuông từ 512 px
+Cách nhanh nhất vẫn là ghi đè thẳng `images/branding/avatar.jpg` bằng một ảnh vuông từ 512 px
 trở lên — trang dùng `object-fit: cover` nên ảnh không vuông cũng không bị méo.
 
-> Favicon là `images/branding/favicon.svg` (một lá trúc); `favicon.png` chỉ là bản dự phòng.
+> Ảnh đại diện xuất JPEG cho nhẹ (480 px, ~40 KB thay vì ~250 KB nếu dùng PNG).\n> Favicon là `images/branding/favicon.svg` (một lá trúc); `favicon.png` chỉ là bản dự phòng.
 
 ### 3. Màu sắc và chữ
 

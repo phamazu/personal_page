@@ -166,10 +166,10 @@ def main():
     BRANDING.mkdir(parents=True, exist_ok=True)
 
     avatar = build_avatar()
-    avatar.save(BRANDING / "avatar.png", optimize=True)
+    avatar.save(BRANDING / "avatar.jpg", quality=92, optimize=True, progressive=True)
     avatar.resize((64, 64), Image.LANCZOS).save(BRANDING / "favicon.png", optimize=True)
 
-    print("Created:", BRANDING / "avatar.png")
+    print("Created:", BRANDING / "avatar.jpg")
     print("Created:", BRANDING / "favicon.png")
 
 

@@ -19,8 +19,8 @@ SOURCE = BRANDING / "avatar-source.jpg"
 # Ảnh gốc 1064×1280: tóc bắt đầu ở y≈215, cằm ở y≈680, mặt rộng x≈390–690.
 CROP = (260, 175, 560)
 
-# Kích thước xuất. 512 là đủ cho khung tròn ~100 px kể cả màn hình 3x.
-SIZE = 512
+# Khung tròn hiển thị tối đa ~136 px; ở màn hình 3x cần ~410 px ảnh, nên 480 px là đủ.
+SIZE = 480
 
 
 def main():
@@ -41,9 +41,9 @@ def main():
     # Làm nét nhẹ sau khi thu nhỏ để mắt và gọng kính không bị mềm.
     avatar = avatar.filter(ImageFilter.UnsharpMask(radius=1.6, percent=52, threshold=3))
 
-    avatar.save(BRANDING / "avatar.png", optimize=True)
+    avatar.save(BRANDING / "avatar.jpg", quality=90, optimize=True, progressive=True)
 
-    print("Created:", BRANDING / "avatar.png", avatar.size)
+    print("Created:", BRANDING / "avatar.jpg", avatar.size)
 
 
 if __name__ == "__main__":
