@@ -1,4 +1,4 @@
-# Ảnh chụp màn hình tạm thời khi kiểm tra giao diện
+﻿# Ảnh chụp màn hình tạm thời khi kiểm tra giao diện
 .preview/
 
 # Trang kiểm tra tạm
@@ -10,6 +10,9 @@ _fonts.png
 
 # Phụ thuộc (dự án không cần, để đây cho chắc)
 node_modules/
+
+# Gói xuất bản (không commit)
+*.zip
 
 # Hệ điều hành / trình soạn thảo
 .DS_Store
