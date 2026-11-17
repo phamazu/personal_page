@@ -1,4 +1,4 @@
-/*
+﻿/*
 Bản dự phòng Canvas 2D cho máy không có WebGL (hoặc khi người dùng chọn chế độ "nhẹ").
 Vẽ ít lá hơn, mỗi lá là một đường bezier kèm gân giữa, chuyển động cập nhật trên CPU.
 */
@@ -22,15 +22,30 @@ Vẽ ít lá hơn, mỗi lá là một đường bezier kèm gân giữa, chuy�
 		context.stroke();
 	}
 
+	function toCss(color, alpha) {
+		return (
+			"rgba(" +
+			Math.round(color[0] * 255) +
+			", " +
+			Math.round(color[1] * 255) +
+			", " +
+			Math.round(color[2] * 255) +
+			", " +
+			alpha +
+			")"
+		);
+	}
+
 	/*
 	Một gradient dùng chung, toạ độ đơn vị: mọi lá chỉ cần scale hệ trục.
 	Nhờ vậy không phải tạo lại gradient mỗi khung hình.
+	Dựng từ bảng màu đang dùng nên đổi giao diện là đổi theo.
 	*/
-	function createGradient(context) {
+	function createGradient(context, palette) {
 		var gradient = context.createLinearGradient(0, -1, 0, 1);
-		gradient.addColorStop(0, "rgba(222, 250, 216, 0.96)");
-		gradient.addColorStop(0.5, "rgba(126, 210, 143, 0.9)");
-		gradient.addColorStop(1, "rgba(52, 128, 78, 0.82)");
+		gradient.addColorStop(0, toCss(palette.pale, 0.96));
+		gradient.addColorStop(0.5, toCss(palette.leaf, 0.92));
+		gradient.addColorStop(1, toCss(palette.shade, 0.86));
 		return gradient;
 	}
 
@@ -47,8 +62,9 @@ Vẽ ít lá hơn, mỗi lá là một đường bezier kèm gân giữa, chuy�
 		}
 
 		var count = settings.count || config.canvas2d.count.desktop;
-		var palette = config.canvas2d;
-		var gradient = createGradient(context);
+		var motion = config.canvas2d;
+		var gradient = createGradient(context, config.color);
+		var ribColor = toCss(config.color.pale, 0.55);
 		var leaves = [];
 		var width = 1;
 		var height = 1;
@@ -56,17 +72,17 @@ Vẽ ít lá hơn, mỗi lá là một đường bezier kèm gân giữa, chuy�
 		var lastTime = 0;
 
 		function spawn(leaf, initial) {
-			leaf.size = Math.random() * (palette.size[1] - palette.size[0]) + palette.size[0];
+			leaf.size = Math.random() * (motion.size[1] - motion.size[0]) + motion.size[0];
 			leaf.baseX = Math.random() * width;
 			leaf.x = leaf.baseX;
 			leaf.y = initial ? Math.random() * height : -leaf.size * 2;
 			leaf.rotation = Math.random() * Math.PI * 2;
-			leaf.spin = Math.random() * (palette.spin[1] - palette.spin[0]) + palette.spin[0];
+			leaf.spin = Math.random() * (motion.spin[1] - motion.spin[0]) + motion.spin[0];
 			leaf.swayPhase = Math.random() * Math.PI * 2;
 			leaf.swaySpeed = Math.random() * 0.5 + 0.2;
-			leaf.swayAmplitude = Math.random() * palette.swayAmplitude + 10;
-			leaf.fall = Math.random() * (palette.fall[1] - palette.fall[0]) + palette.fall[0];
-			leaf.alpha = Math.random() * (palette.alpha[1] - palette.alpha[0]) + palette.alpha[0];
+			leaf.swayAmplitude = Math.random() * motion.swayAmplitude + 10;
+			leaf.fall = Math.random() * (motion.fall[1] - motion.fall[0]) + motion.fall[0];
+			leaf.alpha = Math.random() * (motion.alpha[1] - motion.alpha[0]) + motion.alpha[0];
 			leaf.tumblePhase = Math.random() * Math.PI * 2;
 			leaf.depth = Math.random();
 		}
@@ -119,16 +135,21 @@ Vẽ ít lá hơn, mỗi lá là một đường bezier kèm gân giữa, chuy�
 				context.save();
 				context.translate(leaf.x, leaf.y);
 				context.rotate(leaf.rotation);
-				context.scale(size * squash * palette.aspect, size);
+				context.scale(size * squash * motion.aspect, size);
 				context.globalAlpha = leaf.alpha * (0.6 + leaf.depth * 0.4);
 				context.fillStyle = gradient;
 				drawLeafPath(context);
 				context.fill();
-				context.strokeStyle = "rgba(226, 250, 220, 0.5)";
+				context.strokeStyle = ribColor;
 				context.lineWidth = 0.035;
 				drawRib(context);
 				context.restore();
 			}
+		}
+
+		function setPalette(nextConfig) {
+			gradient = createGradient(context, nextConfig.color);
+			ribColor = toCss(nextConfig.color.pale, 0.55);
 		}
 
 		function dispose() {
@@ -143,6 +164,7 @@ Vẽ ít lá hơn, mỗi lá là một đường bezier kèm gân giữa, chuy�
 			},
 			resize: resize,
 			draw: draw,
+			setPalette: setPalette,
 			dispose: dispose,
 		};
 	}

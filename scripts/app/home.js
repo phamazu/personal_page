@@ -22,6 +22,8 @@ Khởi động trang chủ:
 		panels: Array.prototype.slice.call(document.querySelectorAll("[data-panel]")),
 		effectButton: document.querySelector("[data-effect-toggle]"),
 		effectLabel: document.querySelector("[data-effect-label]"),
+		themeButton: document.querySelector("[data-theme-toggle]"),
+		themeLabel: document.querySelector("[data-theme-label]"),
 	};
 
 	var quoteIndex = 0;
@@ -427,6 +429,58 @@ Khởi động trang chủ:
 		resetBreathing();
 	}
 
+	/* ----------------------------------------------------------------- theme */
+
+	var THEME_KEY = "phuoc.theme";
+	var THEME_COLOR = { light: "#f4f6ef", dark: "#070b0a" };
+
+	function currentTheme() {
+		return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+	}
+
+	function paintThemeLabel() {
+		if (!elements.themeButton || !elements.themeLabel) {
+			return;
+		}
+
+		var theme = currentTheme();
+		elements.themeLabel.textContent = i18n.t("theme." + theme);
+		elements.themeButton.setAttribute(
+			"aria-label",
+			i18n.t("controls.theme") + " — " + i18n.t("theme." + theme)
+		);
+	}
+
+	function applyTheme(theme) {
+		document.documentElement.setAttribute("data-theme", theme);
+
+		try {
+			window.localStorage.setItem(THEME_KEY, theme);
+		} catch (error) {
+			/* localStorage bị chặn: vẫn đổi giao diện cho phiên này. */
+		}
+
+		var meta = document.querySelector('meta[name="theme-color"]');
+		if (meta) {
+			meta.setAttribute("content", THEME_COLOR[theme] || THEME_COLOR.light);
+		}
+
+		scene.setTheme(theme);
+		paintThemeLabel();
+	}
+
+	function initTheme() {
+		paintThemeLabel();
+
+		if (!elements.themeButton) {
+			return;
+		}
+
+		elements.themeButton.addEventListener("click", function () {
+			applyTheme(currentTheme() === "light" ? "dark" : "light");
+		});
+	}
+
 	/* --------------------------------------------------------------- effects */
 
 	function paintEffectLabel() {
@@ -495,6 +549,7 @@ Khởi động trang chủ:
 		paintQuote(true);
 		renderQuoteList();
 		paintEffectLabel();
+		paintThemeLabel();
 
 		if (!breathing.running) {
 			if (breatheNode.phase) {
@@ -520,6 +575,7 @@ Khởi động trang chủ:
 		initOverlay();
 		initBreathing();
 		initEffects();
+		initTheme();
 		initKeyboard();
 		i18n.on(onLanguageChange);
 	}

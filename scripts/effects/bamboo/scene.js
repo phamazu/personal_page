@@ -1,4 +1,4 @@
-/*
+﻿/*
 Bộ điều phối cảnh nền.
 - Chọn WebGL khi máy hỗ trợ, tự lùi về Canvas 2D nếu không.
 - Ba chế độ: "auto" (lá đầy đủ), "light" (nhẹ), "off" (tĩnh).
@@ -91,6 +91,28 @@ Bộ điều phối cảnh nền.
 
 	function currentMode() {
 		return state.mode;
+	}
+
+	/*
+	Đổi bảng màu lá theo giao diện ("light" hoặc "dark").
+	Với WebGL, renderer đọc config mỗi khung hình nên chỉ cần sửa config.
+	Với Canvas 2D, gradient được dựng lại qua setPalette().
+	*/
+	function setTheme(name) {
+		var palette = config.palettes[name] || config.palettes.dark;
+
+		config.color = palette.color;
+		config.depthOfField.alphaNear = palette.alphaNear;
+		config.depthOfField.alphaFar = palette.alphaFar;
+		config.depthOfField.softnessFar = palette.softnessFar;
+
+		if (state.renderer && typeof state.renderer.setPalette === "function") {
+			state.renderer.setPalette(config);
+		}
+	}
+
+	function themeFromDocument() {
+		return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
 	}
 
 	function notify() {
@@ -260,6 +282,7 @@ Bộ điều phối cảnh nền.
 			return;
 		}
 
+		setTheme(themeFromDocument());
 		applyMode(readMode(), false);
 
 		if (window.ResizeObserver) {
@@ -301,6 +324,7 @@ Bộ điều phối cảnh nền.
 		modes: MODES.slice(),
 		getMode: currentMode,
 		setMode: setMode,
+		setTheme: setTheme,
 		cycleMode: cycleMode,
 		hasWebgl: webglAvailable,
 	};

@@ -38,6 +38,9 @@ Khoá có dấu chấm (vd. "nav.breathe") được gắn trực tiếp vào thu
 
 				"controls.effect": "Đổi hiệu ứng lá trúc",
 				"effect.auto": "Lá",
+				"controls.theme": "Đổi giao diện sáng / tối",
+				"theme.light": "Sáng",
+				"theme.dark": "Tối",
 				"effect.light": "Nhẹ",
 				"effect.off": "Tĩnh",
 
@@ -82,6 +85,9 @@ Khoá có dấu chấm (vd. "nav.breathe") được gắn trực tiếp vào thu
 
 				"controls.effect": "Change the leaf effect",
 				"effect.auto": "Leaves",
+				"controls.theme": "Switch between light and dark",
+				"theme.light": "Light",
+				"theme.dark": "Dark",
 				"effect.light": "Light",
 				"effect.off": "Still",
 

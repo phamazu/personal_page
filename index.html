@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="vi" data-lang="vi">
+<html lang="vi" data-lang="vi" data-theme="light">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -9,8 +9,28 @@
 			content="Một trang nhỏ để thở. Vài câu nói về tỉnh thức, chánh niệm và sự trở về với giây phút hiện tại."
 		/>
 		<meta name="author" content="Phước" />
-		<meta name="theme-color" content="#08060d" />
-		<meta name="color-scheme" content="dark" />
+		<meta name="theme-color" content="#f4f6ef" />
+		<meta name="color-scheme" content="light dark" />
+
+		<!-- Áp giao diện đã chọn trước khi vẽ để không bị nháy trắng. -->
+		<script>
+			(function () {
+				try {
+					var saved = window.localStorage.getItem("phuoc.theme");
+					if (saved !== "dark" && saved !== "light") {
+						return;
+					}
+					document.documentElement.setAttribute("data-theme", saved);
+
+					var meta = document.querySelector('meta[name="theme-color"]');
+					if (meta) {
+						meta.setAttribute("content", saved === "dark" ? "#070b0a" : "#f4f6ef");
+					}
+				} catch (error) {
+					/* localStorage bị chặn: dùng mặc định "light". */
+				}
+			})();
+		</script>
 
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content="Phước — Tỉnh thức &amp; Chánh niệm" />
@@ -32,6 +52,7 @@
 		<link rel="stylesheet" href="styles/base.css" />
 		<link rel="stylesheet" href="styles/pages/home.css" />
 		<link rel="stylesheet" href="styles/components/overlay.css" />
+		<link rel="stylesheet" href="styles/themes/light.css" />
 		<noscript>
 			<link rel="stylesheet" href="styles/utilities/noscript.css" />
 		</noscript>
@@ -70,6 +91,30 @@
 						/>
 					</svg>
 					<span class="control__label" data-effect-label>Lá</span>
+				</button>
+				<button
+					class="control control--theme"
+					type="button"
+					data-theme-toggle
+					aria-label="Đổi giao diện sáng / tối"
+					data-i18n-aria-label="controls.theme"
+					title="Sáng / Tối"
+				>
+					<svg class="control__icon control__icon--sun" viewBox="0 0 24 24" aria-hidden="true">
+						<circle cx="12" cy="12" r="4.4" />
+						<rect x="11.15" y="1.9" width="1.7" height="3.1" rx="0.85" />
+						<rect x="11.15" y="19" width="1.7" height="3.1" rx="0.85" />
+						<rect x="1.9" y="11.15" width="3.1" height="1.7" rx="0.85" />
+						<rect x="19" y="11.15" width="3.1" height="1.7" rx="0.85" />
+					</svg>
+					<svg
+						class="control__icon control__icon--moon"
+						viewBox="0 0 24 24"
+						aria-hidden="true"
+					>
+						<path d="M20.4 14.9A8.9 8.9 0 0 1 9.1 3.6 8.9 8.9 0 1 0 20.4 14.9z" />
+					</svg>
+					<span class="control__label" data-theme-label>Sáng</span>
 				</button>
 			</header>
 

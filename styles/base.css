@@ -4,6 +4,8 @@ Mọi trang con đều kế thừa file này, không khai báo lại token ở n
 */
 
 :root {
+	color-scheme: dark;
+
 	/* Màu */
 	--color-bg: #070b0a;
 	--color-bg-soft: #0d1512;

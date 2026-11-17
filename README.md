@@ -1,15 +1,17 @@
-# Phước — Tỉnh thức &amp; Chánh niệm
+﻿# Phước — Tỉnh thức &amp; Chánh niệm
 
 Một trang cá nhân tối giản, một màn hình duy nhất: ảnh đại diện, tên, một câu nói xoay vòng,
-ba lối vào nhỏ, và lá trúc rơi phía sau.
+ba lối vào nhỏ, và lá trúc rơi phía sau. Có hai giao diện — **Sáng** (nền giấy, mặc định) và
+**Tối** — đổi bằng một nút ở góc trên phải.
 
 Không cần build, không thư viện ngoài, không framework. Chỉ HTML, CSS và JavaScript thuần —
 tải thư mục lên hosting tĩnh là chạy.
 
-![Giao diện trang chủ](images/previews/homepage-preview.jpg)
+![Giao diện Sáng](images/previews/homepage-preview.jpg)
 
 <p align="center">
 	<img src="images/previews/mobile-preview.jpg" alt="Giao diện trên điện thoại" width="240" />
+	<img src="images/previews/homepage-dark-preview.jpg" alt="Giao diện Tối" width="480" />
 </p>
 
 ## Có gì trong này
@@ -20,6 +22,8 @@ tải thư mục lên hosting tĩnh là chạy.
   trên màn hình. Không cần texture. Độ nhoè mô phỏng xoá phông theo khoảng cách tới mặt phẳng nét.
 - **Tự lùi về Canvas 2D** khi máy không có WebGL, và có ba chế độ chọn tay: *Lá* · *Nhẹ* · *Tĩnh*
   (nhớ lựa chọn trong `localStorage`).
+- **Hai giao diện Sáng / Tối**, mặc định Sáng, nhớ lựa chọn trong `localStorage`. Bảng màu lá
+  trong cảnh WebGL cũng đổi theo: lá xanh đậm trên giấy, lá phát sáng trên nền tối.
 - **Song ngữ Việt / Anh**, đổi bằng nút ở góc trên phải, nhớ ngôn ngữ đã chọn.
 - **Ba bảng nội dung**: nhịp thở 4 · 2 · 6, danh sách câu nói, và lời giới thiệu.
 - **Tôn trọng người xem**: `prefers-reduced-motion` tắt lá và tự chọn chế độ tĩnh, có liên kết
@@ -53,6 +57,7 @@ tương đối và favicon hoạt động đúng.
 │   ├── base.css                  # biến thiết kế, reset, typography
 │   ├── pages/home.css            # bố cục, responsive, hiệu ứng mở trang
 │   ├── components/overlay.css    # hộp thoại và ba bảng nội dung
+│   ├── themes/light.css          # ✏️ giao diện Sáng (ghi đè lên giao diện tối mặc định)
 │   └── utilities/noscript.css    # dự phòng khi tắt JavaScript
 ├── scripts/
 │   ├── app/
@@ -130,6 +135,24 @@ Việt. Nếu đổi font, nhớ thử lại các câu có dấu nặng, dấu h
 Muốn nhiều lá hơn cho màn hình lớn: tăng `leaves.count.webgl.desktop`. Muốn cảnh nhẹ hơn:
 giảm số lượng và tăng `depthOfField.softnessFar`. Muốn lá vàng úa: đổi `color.leaf` sang tông
 vàng và `color.shade` sang nâu.
+
+### 5. Giao diện Sáng / Tối — `styles/themes/light.css`
+
+Giao diện tối nằm trong `base.css`, `pages/home.css`, `components/overlay.css`. Giao diện sáng
+chỉ là một tệp ghi đè: mọi quy tắc đều gắn với `html[data-theme="light"]`, nên không có nguy cơ
+làm hỏng giao diện tối.
+
+Cách hoạt động:
+
+- `<html data-theme="light">` là mặc định. Đổi sang `dark` là đổi giao diện.
+- Lựa chọn lưu ở `localStorage` khoá `phuoc.theme`; một đoạn script nhỏ trong `<head>` áp giao
+  diện trước khi vẽ để không bị nháy trắng.
+- Nút ở góc trên phải gọi `applyTheme()` trong `scripts/app/home.js`, đồng thời báo cho cảnh
+  (`BambooScene.setTheme`) đổi bảng màu lá trong `config.js → palettes`.
+
+Muốn chỉnh nền giấy: sửa các biến trong `html[data-theme="light"]` ở đầu `light.css`
+(`--color-bg`, `--color-fg`, `--color-accent`). Muốn chỉnh lá trên nền sáng: sửa
+`palettes.light` trong `scripts/effects/bamboo/config.js`.
 
 ## Bàn phím
 

@@ -70,11 +70,34 @@ leaves.aspect. Hàm khoảng cách trong shaders.js vẽ hình lá trong toạ �
 			},
 		},
 
-		/* Ba màu pha trên phiến lá. */
-		color: {
-			pale: [0.902, 0.988, 0.878],
-			leaf: [0.51, 0.855, 0.6],
-			shade: [0.169, 0.494, 0.318],
+		/*
+		Bảng màu lá theo giao diện.
+		- dark: lá sáng phát quang trên nền tối.
+		- light: lá xanh đậm để hiện rõ trên nền giấy.
+		alphaNear / alphaFar / softnessFar cũng đổi theo giao diện vì trên nền sáng
+		không cần lá đậm đặc như trên nền tối.
+		*/
+		palettes: {
+			dark: {
+				color: {
+					pale: [0.902, 0.988, 0.878],
+					leaf: [0.51, 0.855, 0.6],
+					shade: [0.169, 0.494, 0.318],
+				},
+				alphaNear: 1.0,
+				alphaFar: 0.8,
+				softnessFar: 0.24,
+			},
+			light: {
+				color: {
+					pale: [0.573, 0.82, 0.647],
+					leaf: [0.192, 0.502, 0.322],
+					shade: [0.086, 0.271, 0.18],
+				},
+				alphaNear: 0.92,
+				alphaFar: 0.58,
+				softnessFar: 0.27,
+			},
 		},
 
 		/* Giới hạn chất lượng. */
@@ -95,4 +118,7 @@ leaves.aspect. Hàm khoảng cách trong shaders.js vẽ hình lá trong toạ �
 			size: [16, 40],
 		},
 	};
+
+	/* Bảng màu đang dùng; BambooScene.setTheme() đổi khi người xem chuyển giao diện. */
+	window.BambooConfig.color = window.BambooConfig.palettes.dark.color;
 })(window);
